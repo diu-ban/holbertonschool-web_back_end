@@ -41,7 +41,7 @@ class Server:
             try:
                 assert isinstance(page,int) and page > 0
                 assert isinstance(page_size, int) and page_size > 0
-            except:
+            except(AssertionError):
                  return []
 
             dataset = self.dataset()
@@ -58,7 +58,6 @@ class Server:
 
         data = self.get_page(page,page_size)
 
-        print(type(page))
         return {
              "page_size":len(data),
              "page":page,
