@@ -52,15 +52,17 @@ class Server:
             return dataset[start:end]
     
     def get_hyper(self, page: int=1, page_size:int=10) -> {str,any}:
-        data = self.get_page(page, page_size)
-        data_len = len(self.dataset())
-        total_page = math.ceil(data_len / page_size)
+        dataset = self.dataset()
+        datalen = len(dataset)
+        total_page = math.ceil(datalen / page_size)
+
+        data = self.get_page(page,page_size)
 
         return {
              "page_size":len(data),
              "page":page,
              "data":data,
-             "next_page":page + 1 if (page * page_size)<data_len else None,
+             "next_page":page + 1 if page < page_size else None,
              "prev_page":page - 1 if page > 1 else None,
              "total_page":total_page
         }
