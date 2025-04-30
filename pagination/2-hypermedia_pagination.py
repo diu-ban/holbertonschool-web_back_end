@@ -6,9 +6,9 @@ that takes two integer arguments page and page_size.
 
 import csv
 import math
-from typing import List
+from typing import List, Tuple, Any, Dict
 
-def index_range(page: int = 1, page_size: int = 1) -> (int,int):
+def index_range(page: int = 1, page_size: int = 1) -> Tuple[int,int]:
     """
     Function return a tuple of 2
     containing a start index and an end
@@ -51,13 +51,14 @@ class Server:
                  return []
             return dataset[start:end]
     
-    def get_hyper(self, page: int=1, page_size:int=10) -> {str,any}:
+    def get_hyper(self, page: int=1, page_size:int=10) -> Dict[str,Any]:
         dataset = self.dataset()
         datalen = len(dataset)
         total_page = math.ceil(datalen / page_size)
 
         data = self.get_page(page,page_size)
 
+        print(type(page))
         return {
              "page_size":len(data),
              "page":page,
